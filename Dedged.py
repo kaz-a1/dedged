@@ -42,9 +42,12 @@ def get_files_in_directory(directory):
 # メインの実行部分
 if __name__ == "__main__":
     root_file = input()
-    for input_file in get_files_in_directory(root_file):
-        # ファイルを暗号化
-        encrypt_file(input_file, randomname(32).encode('utf-8')[:32])
+    if os.path.isdir(root_file):
+        for input_file in get_files_in_directory(root_file):
+            # ファイルを暗号化
+            encrypt_file(input_file, randomname(32).encode('utf-8')[:32])
+    else:
+        encrypt_file(root_file, randomname(32).encode('utf-8')[:32])
     shutil.rmtree(root_file)
     
     print("Encryption completed successfully.")
