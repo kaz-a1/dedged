@@ -6,11 +6,15 @@ import shutil
 import random
 import string
 import argparse
+import questionary
+import sys
 
 #AESで暗号化
 def encrypt_file_AES(input_file, times):
-
     # ファイルの読み込み
+    if os.path.exists(input_file) == False:
+        print("file is not found.")
+        sys.exit()
     with open(input_file, 'rb') as f:
         data = f.read()
     print(input_file + " is encrypted start.")
@@ -42,6 +46,10 @@ def generate_rsa_key_pair():
 
 def encrypt_file_RSA(input_file, public_key, times):
     # ファイルの読み込み
+    if os.path.exists(input_file) == False:
+        print("file is not found.")
+        sys.exit()
+    # ファイルの読み込み
     with open(input_file, 'rb') as f:
         data = f.read()
     print(input_file + " is encrypted start.")
@@ -62,6 +70,7 @@ def encrypt_file_RSA(input_file, public_key, times):
         f.write(encrypted_data)
 
     print(input_file + " is encrypted ok.")
+
 def randomname(n):
     randlst = [random.choice(string.ascii_letters + string.digits) for i in range(n)]
     return ''.join(randlst)
@@ -82,11 +91,20 @@ if __name__ == "__main__":
     parser.add_argument("file", help="please delete directory or file.")
     parser.add_argument("-rm", action="store_true", help="you could remove your encrypted file.")
     parser.add_argument("-remove", action="store_true", help="you could remove your encrypted file.")
-    parser.add_argument("-t", help="you could be set ecryting times.", type=int, default=1)
-    parser.add_argument("-times", help="you could be set ecryting times.", type=int, default=1)
-    parser.add_argument("-A", help="you could be set ecryting algorism.", type=str, default="AES")
-    parser.add_argument("-Algorism", help="you could be set ecryting algorism.", type=str, default="AES")
+    parser.add_argument("-t", help="you could be set ecrypting times.", type=int, default=1)
+    parser.add_argument("-times", help="you could be set ecrypting times.", type=int, default=1)
+    parser.add_argument("-A", help="you could be set ecrypting algorism.", type=str, default="AES")
+    parser.add_argument("-Algorism", help="you could be set ecrypting algorism.", type=str, default="AES")
+    parser.add_argument("-rf", action="store_true")
     args = parser.parse_args()
+    while args.rf == False:
+        que = questionary.text('are you sure you want to delete or encrypt it? y(yes)/n(no)').ask()
+        if que.upper() == "N" or que.upper() == "NO":
+            sys.exit()
+        elif que.upper() == "Y" or que.upper() == "YES":
+            break
+        else:
+            print("plese response question y/n.")
     if os.path.isdir(args.file):
         for input_file in get_files_in_directory(args.file):
             times = args.t if args.t != 1 else args.times if args.times != 1 else 1
