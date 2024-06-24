@@ -1,1 +1,4 @@
-ENV/
+ENV/*
+dedged.egg-info/*
+dist/*
+__pycache__/*

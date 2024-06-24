@@ -86,7 +86,7 @@ def get_files_in_directory(directory):
     return file_list
 
 # メインの実行部分
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("file", help="please delete directory or file.")
     parser.add_argument("-rm", action="store_true", help="you could remove your encrypted file.")
