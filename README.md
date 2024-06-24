@@ -1,6 +1,3 @@
 # Dedged
 
-This program is safety delete and encrypte your data.
-
-How to use
-you could be delete this command -rm "dedged <your file path>".
+This program allows for pseudo-complete deletion of files. It encrypts the file using either RSA or AES encryption before deleting it. Since this requires a Python environment, please ensure Python is installed beforehand.
