@@ -8,6 +8,7 @@ import string
 import argparse
 import questionary
 import sys
+import logging
 
 #AESで暗号化
 def encrypt_file_AES(input_file, times):
