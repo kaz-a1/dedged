@@ -90,20 +90,14 @@ def get_files_in_directory(directory):
 # メインの実行部分
 def main():
     parser = argparse.ArgumentParser()
-    # ファイルまたはディレクトリを指定する引数
-    parser.add_argument("file", help="Specify the directory or file to delete.")
-
-    # ファイルを削除するためのオプション
-    parser.add_argument("-rm", "--remove", action="store_true", help="Remove the encrypted file after encryption.")
-
-    # 暗号化回数を設定するオプション
-    parser.add_argument("-t", "--times", help="Set the number of encryption times.", type=int, default=1)
-
-    # 暗号化アルゴリズムを設定するオプション
-    parser.add_argument("-a", "--algorithm", help="Set the encryption algorithm.", type=str, default="AES")
-
-    # 安全な削除を実行するオプション
-    parser.add_argument("-rf", action="store_true", help="not question.")
+    parser.add_argument("file", help="Please delete directory or file.")
+    parser.add_argument("-rm", action="store_true", help="You could remove your encrypted file.")
+    parser.add_argument("--remove", action="store_true", help="You could remove your encrypted file.")
+    parser.add_argument("-t", help="You could set encrypting times.", type=int, default=1)
+    parser.add_argument("--times", help="You could set encrypting times.", type=int, default=1)
+    parser.add_argument("-A", help="You could set encrypting algorithm.", type=str, default="AES")
+    parser.add_argument("--Algorism", help="You could set encrypting algorithm.", type=str, default="AES")
+    parser.add_argument("-rf", action="store_true")
     args = parser.parse_args()
     while args.rf == False:
         que = questionary.text('are you sure you want to delete or encrypt it? y(yes)/n(no)').ask()
