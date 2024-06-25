@@ -16,10 +16,11 @@ def encrypt_file_AES(input_file, times):
     if os.path.exists(input_file) == False:
         print("file is not found.")
         sys.exit()
-    with open(input_file, 'rb') as f:
-        data = f.read()
+    
     print(input_file + " is encrypted start.")
     for i in range(0, int(times)):
+        with open(input_file, 'rb') as f:
+            data = f.read()
         # AESで使用する鍵とIV（Initialization Vector）を生成
         backend = default_backend()
         iv = os.urandom(16)  # IVはランダムに生成する
@@ -29,10 +30,10 @@ def encrypt_file_AES(input_file, times):
         # データをAESで暗号化し、IVを先頭に追加
         encrypted_data = encryptor.update(data) + encryptor.finalize()
 
-    # IVと暗号化されたデータをファイルに書き込む
-    with open(input_file, 'wb') as f:
-        f.seek(0)
-        f.write(iv + encrypted_data)
+        # IVと暗号化されたデータをファイルに書き込む
+        with open(input_file, 'wb') as f:
+            f.seek(0)
+            f.write(iv + encrypted_data)
 
     print(input_file + " is encrypted ok.")
 #RSA暗号で暗号化
@@ -54,7 +55,7 @@ def encrypt_file_RSA(input_file, public_key, times):
     with open(input_file, 'rb') as f:
         data = f.read()
     print(input_file + " is encrypted start.")
-    for i in (0,times):
+    for i in range(0,times):
         # データをRSAで暗号化
         encrypted_data = public_key.encrypt(
             data,
@@ -89,14 +90,20 @@ def get_files_in_directory(directory):
 # メインの実行部分
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("file", help="please delete directory or file.")
-    parser.add_argument("-rm", action="store_true", help="you could remove your encrypted file.")
-    parser.add_argument("-remove", action="store_true", help="you could remove your encrypted file.")
-    parser.add_argument("-t", help="you could be set ecrypting times.", type=int, default=1)
-    parser.add_argument("-times", help="you could be set ecrypting times.", type=int, default=1)
-    parser.add_argument("-A", help="you could be set ecrypting algorism.", type=str, default="AES")
-    parser.add_argument("-Algorism", help="you could be set ecrypting algorism.", type=str, default="AES")
-    parser.add_argument("-rf", action="store_true")
+    # ファイルまたはディレクトリを指定する引数
+    parser.add_argument("file", help="Specify the directory or file to delete.")
+
+    # ファイルを削除するためのオプション
+    parser.add_argument("-rm", "--remove", action="store_true", help="Remove the encrypted file after encryption.")
+
+    # 暗号化回数を設定するオプション
+    parser.add_argument("-t", "--times", help="Set the number of encryption times.", type=int, default=1)
+
+    # 暗号化アルゴリズムを設定するオプション
+    parser.add_argument("-a", "--algorithm", help="Set the encryption algorithm.", type=str, default="AES")
+
+    # 安全な削除を実行するオプション
+    parser.add_argument("-rf", action="store_true", help="not question.")
     args = parser.parse_args()
     while args.rf == False:
         que = questionary.text('are you sure you want to delete or encrypt it? y(yes)/n(no)').ask()
@@ -133,3 +140,6 @@ def main():
         if args.rm or args.remove:
             os.remove(args.file)
     print("Encryption completed successfully.")
+
+if __name__ == "__main__":
+    main()
