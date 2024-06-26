@@ -2,7 +2,7 @@ name: check-python-linter
 on:
   push:
 jobs:
-  check-python-format:
+  check-python-linter:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
