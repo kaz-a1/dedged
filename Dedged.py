@@ -100,25 +100,25 @@ def get_files_in_directory(directory):
 # メインの実行部分
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("file", help="please delete directory or file.")
+    parser.add_argument("file", help="Please delete directory or file.")
     parser.add_argument(
-        "-rm", action="store_true", help="you could remove your encrypted file."
+        "-rm", action="store_true", help="You could remove your encrypted file."
     )
     parser.add_argument(
-        "-remove", action="store_true", help="you could remove your encrypted file."
+        "-remove", action="store_true", help="You could remove your encrypted file."
     )
     parser.add_argument(
-        "-t", help="you could be set ecrypting times.", type=int, default=1
+        "-t", help="You could be set encrypting times.", type=int, default=1
     )
     parser.add_argument(
-        "-times", help="you could be set ecrypting times.", type=int, default=1
+        "-times", help="You could set encrypting times.", type=int, default=1
     )
     parser.add_argument(
-        "-A", help="you could be set ecrypting algorism.", type=str, default="AES"
+        "-A", help="You could set encrypting algorism.", type=str, default="AES"
     )
     parser.add_argument(
         "-Algorism",
-        help="you could be set ecrypting algorism.",
+        help="You could be set encrypting algorithm.",
         type=str,
         default="AES",
     )
