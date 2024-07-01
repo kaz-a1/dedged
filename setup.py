@@ -9,8 +9,8 @@ setup(
         "questionary",
     ],
     entry_points={
-        'console_scripts': [
-            'dedged=Dedged:main',
+        "console_scripts": [
+            "dedged=Dedged:main",
         ],
     },
 )
