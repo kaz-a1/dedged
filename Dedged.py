@@ -12,7 +12,7 @@ import sys
 
 
 # AESで暗号化
-def encrypt_file_AES(input_file, times):
+def encrypt_file_AES(input_file: str, times: int):
     # ファイルの読み込み
     if os.path.exists(input_file) is False:
         print("file is not found.")
@@ -43,7 +43,7 @@ def encrypt_file_AES(input_file, times):
 
 
 # RSA暗号で暗号化
-def generate_rsa_key_pair():
+def generate_rsa_key_pair() -> tuple[rsa.RSAPrivateKey, rsa.RSAPublicKey]:
     private_key = rsa.generate_private_key(
         public_exponent=65537,
         key_size=2048,
@@ -53,7 +53,7 @@ def generate_rsa_key_pair():
     return private_key, public_key
 
 
-def encrypt_file_RSA(input_file, public_key, times):
+def encrypt_file_RSA(input_file: str, public_key: rsa.RSAPublicKey, times: int):
     # ファイルが存在するかを確認する
     if os.path.exists(input_file) is False:
         print("file is not found.")
@@ -81,12 +81,12 @@ def encrypt_file_RSA(input_file, public_key, times):
     print(input_file + " is encrypted ok.")
 
 
-def randomname(n):
+def randomname(n: int) -> str:
     randlst = [random.choice(string.ascii_letters + string.digits) for i in range(n)]
     return "".join(randlst)
 
 
-def get_files_in_directory(directory):
+def get_files_in_directory(directory: str) -> list[str]:
     file_list = []
 
     # ディレクトリを再帰的に探索し、ファイルをリストに追加する
