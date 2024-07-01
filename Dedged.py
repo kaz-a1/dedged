@@ -162,5 +162,6 @@ def main():
             os.remove(args.file)
     print("Encryption completed successfully.")
 
+
 if __name__ == "__main__":
     main()
