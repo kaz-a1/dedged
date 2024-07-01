@@ -17,10 +17,10 @@ def encrypt_file_AES(input_file, times):
     if os.path.exists(input_file) is False:
         print("file is not found.")
         sys.exit()
-    with open(input_file, "rb") as f:
-        data = f.read()
     print(input_file + " is encrypted start.")
     for i in range(0, int(times)):
+        with open(input_file, "rb") as f:
+            data = f.read()
         # AESで使用する鍵とIV（Initialization Vector）を生成
         backend = default_backend()
         iv = os.urandom(16)  # IVはランダムに生成する
@@ -34,10 +34,10 @@ def encrypt_file_AES(input_file, times):
         # データをAESで暗号化し、IVを先頭に追加
         encrypted_data = encryptor.update(data) + encryptor.finalize()
 
-    # IVと暗号化されたデータをファイルに書き込む
-    with open(input_file, "wb") as f:
-        f.seek(0)
-        f.write(iv + encrypted_data)
+        # IVと暗号化されたデータをファイルに書き込む
+        with open(input_file, "wb") as f:
+            f.seek(0)
+            f.write(iv + encrypted_data)
 
     print(input_file + " is encrypted ok.")
 
