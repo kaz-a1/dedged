@@ -8,13 +8,12 @@ import string
 import argparse
 import questionary
 import sys
-import logging
 
 
 # AESで暗号化
 def encrypt_file_AES(input_file, times):
     # ファイルの読み込み
-    if os.path.exists(input_file) == False:
+    if os.path.exists(input_file) is False:
         print("file is not found.")
         sys.exit()
     with open(input_file, "rb") as f:
@@ -55,7 +54,7 @@ def generate_rsa_key_pair():
 
 def encrypt_file_RSA(input_file, public_key, times):
     # ファイルの読み込み
-    if os.path.exists(input_file) == False:
+    if os.path.exists(input_file) is False:
         print("file is not found.")
         sys.exit()
     # ファイルの読み込み
@@ -124,7 +123,7 @@ def main():
     )
     parser.add_argument("-rf", action="store_true")
     args = parser.parse_args()
-    while args.rf == False:
+    while args.rf is False:
         que = questionary.text(
             "are you sure you want to delete or encrypt it? y(yes)/n(no)"
         ).ask()
