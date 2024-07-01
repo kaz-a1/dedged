@@ -54,15 +54,15 @@ def generate_rsa_key_pair():
 
 
 def encrypt_file_RSA(input_file, public_key, times):
-    # ファイルの読み込み
+    # ファイルが存在するかを確認する
     if os.path.exists(input_file) is False:
         print("file is not found.")
         sys.exit()
-    # ファイルの読み込み
-    with open(input_file, "rb") as f:
-        data = f.read()
     print(input_file + " is encrypted start.")
-    for i in (0, times):
+    for i in range(0, times):
+        # ファイルの読み込み
+        with open(input_file, "rb") as f:
+            data = f.read()
         # データをRSAで暗号化
         encrypted_data = public_key.encrypt(
             data,
@@ -73,10 +73,10 @@ def encrypt_file_RSA(input_file, public_key, times):
             ),
         )
 
-    # 暗号化されたデータをファイルに書き込む
-    with open(input_file, "wb") as f:
-        f.seek(0)
-        f.write(encrypted_data)
+        # 暗号化されたデータをファイルに書き込む
+        with open(input_file, "wb") as f:
+            f.seek(0)
+            f.write(encrypted_data)
 
     print(input_file + " is encrypted ok.")
 
