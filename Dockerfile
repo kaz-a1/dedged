@@ -1,3 +1,7 @@
+# Usage:
+# docker build --tag dedged:latest .
+# docker run dedged:latest -h
+
 FROM python:3.12.4-alpine3.20
 WORKDIR /app
 
