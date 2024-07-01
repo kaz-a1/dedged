@@ -102,27 +102,27 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("file", help="Please delete directory or file.")
     parser.add_argument(
-        "-rm", action="store_true", help="You could remove your encrypted file."
+        "--rm", action="store_true", help="You could remove your encrypted file."
     )
     parser.add_argument(
-        "-remove", action="store_true", help="You could remove your encrypted file."
+        "--remove", action="store_true", help="You could remove your encrypted file."
     )
     parser.add_argument(
         "-t", help="You could be set encrypting times.", type=int, default=1
     )
     parser.add_argument(
-        "-times", help="You could set encrypting times.", type=int, default=1
+        "--times", help="You could set encrypting times.", type=int, default=1
     )
     parser.add_argument(
         "-A", help="You could set encrypting algorism.", type=str, default="AES"
     )
     parser.add_argument(
-        "-Algorism",
+        "--Algorism",
         help="You could be set encrypting algorithm.",
         type=str,
         default="AES",
     )
-    parser.add_argument("-rf", action="store_true")
+    parser.add_argument("--rf", action="store_true")
     args = parser.parse_args()
     while args.rf is False:
         que = questionary.text(
